@@ -23,13 +23,13 @@ All built-in reporters collect error/warning information (messages) that is pass
 - **description**: Unknown property 'colour'. (rule: known-properties)
 - **code**: 'known-properties'
 
-##Installation
+## Installation
     npm install gulp-csslint --save-dev
 
-##Samples
+## Samples
 Examples are for gulp
 
-###jshint example:
+### jshint example:
     var jshint = require('gulp-jshint');
     var reporters = require('reporters');
 
@@ -39,7 +39,7 @@ Examples are for gulp
         .pipe(jshint.reporter(reporters('gulp-jshint')));
     });
 
-###csslint example:
+### csslint example:
     var csslint = require('gulp-csslint');
     var reporters = require('reporters');
 
@@ -49,7 +49,7 @@ Examples are for gulp
       .pipe(csslint.reporter(reporters('gulp-csslint')));
   });
 
-###tslint/typescript example:
+### tslint/typescript example:
     var typescript = require('gulp-typescript');
     var tslint = require('gulp-tslint');
     var reporters = require('reporters');
@@ -62,7 +62,7 @@ Examples are for gulp
     tsResult.js
       .pipe(gulp.dest('js/')):
   });
-###sass example:
+### sass example:
     var sass = require('gulp-sass');
     var reporters = require('reporters');
 
@@ -73,7 +73,7 @@ Examples are for gulp
       }))
   });
 
-###jasmine example:
+### jasmine example:
     var jasmine = require('gulp-jasmine');
     var reporters = require('reporters');
 
@@ -85,7 +85,7 @@ Examples are for gulp
 
 ## Configuration
 
-###getAvailable()
+### getAvailable()
 Returns a list of available built-in reporters.
 You can use one of the available reporters by calling `reporters()` with the reporter name:
 
@@ -99,14 +99,14 @@ Some reporters accept configuration properties:
       debug: true // log reporter information
     });
 
-###debug = false
+### debug = false
 Enable to logs detailed information of what is done.
 
     var reporters = require('reporters');
     reporters.debug = true;
 
 
-###filterOrUpdate(messages)
+### filterOrUpdate(messages)
 This is your chance to remove or update messages before they are handled.
 
     var reporters = require('reporters');
@@ -116,7 +116,7 @@ This is your chance to remove or update messages before they are handled.
       });
     };
 
-###output
+### output
 A function (or array of functions) that can handle messages.
 
     var reporters = require('reporters');
@@ -135,7 +135,7 @@ You can use one of the built-in output handlers with `reporters.getOutput('name'
        reporters.getOutput('notify')();
     ];
 
-###report(messages)
+### report(messages)
 This method will the handle the messages.
 `report()` will first use `filterOrUpdate` and then check if sourcemaps are available to update error locations.
 It will then send the results to the `output` handlers.
