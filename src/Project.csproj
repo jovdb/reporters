@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{093E14B5-CA31-4C22-B0E2-0B1BDB05AD36}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Project</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49402</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49402/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="scripts\index.ts" />
+    <Content Include="scripts\interfaces.ts" />
+    <Content Include="scripts\input\gulp-tslint.ts" />
+    <Content Include="scripts\input\gulp-jshint.ts" />
+    <Content Include="scripts\input\gulp-sass.ts" />
+    <Content Include="scripts\input\gulp-csslint.ts" />
+    <Content Include="specs\testfiles\inline-ref-to-ext-map\coffeescript\CoffeeScript.js" />
+    <Content Include="specs\testfiles\inline-ref-to-ext-map\css\dashboard.css" />
+    <Content Include="specs\testfiles\inline-ref-to-ext-map\typescript\auth-ctrl.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="specs\indexSpec.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="specs\testfiles\inline-ref-to-ext-map\typescript\auth-ctrl.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="specs\testfiles\inline-ref-to-ext-map\coffeescript\CoffeeScript.coffee" />
+    <Content Include="specs\testfiles\inline-ref-to-ext-map\coffeescript\CoffeeScript.js.map" />
+    <Content Include="specs\testfiles\inline-ref-to-ext-map\css\dashboard.css.map" />
+    <Content Include="specs\testfiles\inline-ref-to-ext-map\css\dashboard.scss" />
+    <Content Include="specs\testfiles\inline-ref-to-ext-map\typescript\auth-ctrl.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\output\vs-console.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\output\notify.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\output\beep.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\input\gulp-typescript.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\input\gulp-jasmine.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>"$(ProjectDir)..\build.bat"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

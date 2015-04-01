@@ -1,0 +1,11 @@
+syntax: glob
+
+node_modules
+src/obj
+src/bin
+src/scripts/*.js.map
+src/scripts/*.d.ts
+src/specs/*.js.map
+src/specs/*.d.ts
+*.csproj.user
+*.suo
