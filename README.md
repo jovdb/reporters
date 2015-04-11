@@ -1,6 +1,6 @@
 # reporters
 
-> Extracts information from csslint, jshint, ... reporters and allows you to handle them all in the same way.
+> Extracts information from csslint, jshint, typescript, ... reporters and allows you to handle them all in the same way.
 
 ## Introduction
 Don't you find it very frustrating that each package logs errors/warnings in it's own format. This package is an attempt to collect the error/warning information of node packages and log/handle them in your favorite way.
@@ -9,9 +9,10 @@ The default output format is in a Visual Studio friendly way (you can double cli
 
     C:/Users/JoVdB/MyProject/css/index.css(5,9): warning: Unknown property 'colour'. (rule: known-properties)
 
-The application has a list of built-in reporters that can be used (gulp-csslint, gulp-jshint, gulp-typescript, gulp--sass, gulp-jasmine), or you can also create your own.
+The application has a list of built-in reporters that can be used (gulp-csslint, gulp-jshint, gulp-typescript, gulp-sass, gulp-jasmine), or you can also create your own.
 
-As output you can use one of the built-in outputs (Visual Studio style, notifier, beep) or create your own
+As output you can use one of the built-in outputs (Visual Studio style, notifier, beep) or create your own.
+When sourcemap information is available, it will use the original source location.
 
 All built-in reporters collect error/warning information (messages) that is passed to the output, it can contain following items:
 
@@ -24,7 +25,7 @@ All built-in reporters collect error/warning information (messages) that is pass
 - **code**: 'known-properties'
 
 ## Installation
-    npm install gulp-csslint --save-dev
+    npm install reporters --save-dev
 
 ## Samples
 Examples are for gulp
@@ -44,10 +45,10 @@ Examples are for gulp
     var reporters = require('reporters');
 
     gulp.task('csslint', function () {
-    return gulp.src(['./**/*.css'])
-      .pipe(csslint())
-      .pipe(csslint.reporter(reporters('gulp-csslint')));
-  });
+      return gulp.src(['./**/*.css'])
+        .pipe(csslint())
+        .pipe(csslint.reporter(reporters('gulp-csslint')));
+    });
 
 ### tslint/typescript example:
     var typescript = require('gulp-typescript');
@@ -55,33 +56,35 @@ Examples are for gulp
     var reporters = require('reporters');
 
     gulp.task('typescript', function () {
-    var tsResult = gulp.src(['./**/*.ts', '!./**/*.d.ts'])
-      .pipe(tslint())
-      .pipe(tslint.report(reporters('gulp-tslint')))
-      .pipe(typescript({}, {}, reporters('gulp-typescript')));
-    tsResult.js
-      .pipe(gulp.dest('js/')):
-  });
+      var tsResult = gulp.src(['./**/*.ts', '!./**/*.d.ts'])
+        .pipe(tslint())
+        .pipe(tslint.report(reporters('gulp-tslint')))
+        .pipe(typescript({}, {}, reporters('gulp-typescript')));
+      return tsResult.js
+        .pipe(gulp.dest('js/'));
+    });
+
 ### sass example:
     var sass = require('gulp-sass');
     var reporters = require('reporters');
 
-    gulp.task('csslint', function () {
-    return gulp.src(['./**/*.scss'])
-      .pipe(sass({
-        onError: reporters('gulp-sass')
-      }))
-  });
+    gulp.task('sass', function () {
+      return gulp.src(['./**/*.scss'])
+        .pipe(sass({
+          onError: reporters('gulp-sass')
+        }));
+    });
 
 ### jasmine example:
     var jasmine = require('gulp-jasmine');
     var reporters = require('reporters');
 
-    gulp.src('./**/*Spec.js')
-      .pipe(jasmine({
-        reporter: reporters('gulp-jasmine')
-      }));
-
+	gulp.task('test', function () {
+      gulp.src('./**/*Spec.js')
+        .pipe(jasmine({
+          reporter: reporters('gulp-jasmine')
+        }));
+    });
 
 ## Configuration
 
@@ -90,7 +93,7 @@ Returns a list of available built-in reporters.
 You can use one of the available reporters by calling `reporters()` with the reporter name:
 
     var reporters = require('reporters');
-    reporters('gulp-jshint'); // returns reporter that can be used with the gulp-jshint package
+    reporters('gulp-jshint'); // returns reporter that can be used with the gulp-jshint module
 
 Some reporters accept configuration properties:
 
