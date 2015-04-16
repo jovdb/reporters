@@ -1,7 +1,7 @@
 /// <reference path='../interfaces.ts' />
 
 /** Creates the method/object that the reporter wants */
-module.exports = function(done: (messsages: IMessage[]) => void, options?: any) {
+module.exports = function(done: (messages: IMessage[]) => void, options?: any) {
   'use strict';
 
   // return what the reporter wants
@@ -16,7 +16,7 @@ module.exports = function(done: (messsages: IMessage[]) => void, options?: any) 
     done(output.map(function (item: any): IMessage {
       return {
         sourceName: 'gulp-tslint',
-        type: 'error',
+        type: (options && options.warning) ? 'warning' : 'error',
         filePath: file.path,
         lineNbr: item.startPosition.line,
         colNbr: item.startPosition.character,
