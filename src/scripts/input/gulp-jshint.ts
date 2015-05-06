@@ -18,7 +18,7 @@ module.exports = function(done: (messsages: IMessage[]) => void, options?: any) 
         filePath: item.file,
         lineNbr: item.error.line,
         colNbr: item.error.character,
-        type: item.error.id.substring(1, item.error.id.length - 1),
+        type: item.error.id ? item.error.id.substring(1, item.error.id.length - 1) : "error",
         description: item.error.reason,
         line: item.error.evidence, // line
         code: item.error.code
