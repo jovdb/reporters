@@ -1,6 +1,6 @@
 # reporters
 
-> Extracts information from csslint, jshint, ... reporters and allows you to handle them all in the same way.
+Extracts information from csslint, jshint, ... reporters and allows you to handle them all in the same way.
 
 ## Introduction
 Don't you find it very frustrating that each package logs errors/warnings in it's own format. This package is an attempt to collect the error/warning information of node packages and log/handle them in your favorite way.
@@ -24,38 +24,38 @@ All built-in reporters collect error/warning information (messages) that is pass
 - **code**: 'known-properties'
 
 ## Installation
-    npm install gulp-csslint --save-dev
+    npm install reporters --save-dev
 
 ## Samples
 Examples are for gulp
 
 ### jshint example:
-    var jshint = require('gulp-jshint');
-    var reporters = require('reporters');
+    const jshint = require('gulp-jshint');
+    const reporters = require('reporters');
 
-    gulp.task('jshint', function () {
+    gulp.task('jshint', () => {
       return gulp.src(['./**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter(reporters('gulp-jshint')));
     });
 
 ### csslint example:
-    var csslint = require('gulp-csslint');
-    var reporters = require('reporters');
+    const csslint = require('gulp-csslint');
+    const reporters = require('reporters');
 
-    gulp.task('csslint', function () {
+    gulp.task('csslint', () => {
     return gulp.src(['./**/*.css'])
       .pipe(csslint())
       .pipe(csslint.reporter(reporters('gulp-csslint')));
   });
 
 ### tslint/typescript example:
-    var typescript = require('gulp-typescript');
-    var tslint = require('gulp-tslint');
-    var reporters = require('reporters');
+    const typescript = require('gulp-typescript');
+    const tslint = require('gulp-tslint');
+    const reporters = require('reporters');
 
-    gulp.task('typescript', function () {
-    var tsResult = gulp.src(['./**/*.ts', '!./**/*.d.ts'])
+    gulp.task('typescript', () => {
+    const tsResult = gulp.src(['./**/*.ts', '!./**/*.d.ts'])
       .pipe(tslint())
       .pipe(tslint.report(reporters('gulp-tslint', {warning: true})))
       .pipe(typescript({}, {}, reporters('gulp-typescript')));
@@ -63,10 +63,10 @@ Examples are for gulp
       .pipe(gulp.dest('js/')):
   });
 ### sass example:
-    var sass = require('gulp-sass');
-    var reporters = require('reporters');
+    const sass = require('gulp-sass');
+    const reporters = require('reporters');
 
-    gulp.task('csslint', function () {
+    gulp.task('csslint', () => {
     return gulp.src(['./**/*.scss'])
       .pipe(sass({
         onError: reporters('gulp-sass')
@@ -74,8 +74,8 @@ Examples are for gulp
   });
 
 ### jasmine example:
-    var jasmine = require('gulp-jasmine');
-    var reporters = require('reporters');
+    const jasmine = require('gulp-jasmine');
+    const reporters = require('reporters');
 
     gulp.src('./**/*Spec.js')
       .pipe(jasmine({
@@ -89,31 +89,31 @@ Examples are for gulp
 Returns a list of available built-in reporters.
 You can use one of the available reporters by calling `reporters()` with the reporter name:
 
-    var reporters = require('reporters');
+    const reporters = require('reporters');
     reporters('gulp-jshint'); // returns reporter that can be used with the gulp-jshint package
 
 Some reporters accept configuration properties:
 
-    var reporters = require('reporters');
+    const reporters = require('reporters');
     reporters('gulp-jshint', {
       debug: true // log reporter information
     });
 
 ### debug = false
-Enable to logs detailed information of what is done.
+Enable to log detailed information of what is done.
 
-    var reporters = require('reporters');
+    const reporters = require('reporters');
     reporters.debug = true;
 
 
 ### filterOrUpdate(messages)
 This is your chance to remove or update messages before they are handled.
-You can use this to limit the number of messages handled.
+You can use this for example to limit the number of messages handled:
 
-    var reporters = require('reporters');
-    var logCount = 0;
-    reporters.filterOrUpdate = function(messages) {
-      return messages.filter(function(message) {
+    const reporters = require('reporters');
+    const logCount = 0;
+    reporters.filterOrUpdate = (messages) => {
+      return messages.filter((message) => {
         logCount++;
         return (message.filePath.indexOf('/3rdParty/') === -1) && (logCount <= 100);
       });
@@ -122,9 +122,9 @@ You can use this to limit the number of messages handled.
 ### output
 A function (or array of functions) that can handle messages.
 
-    var reporters = require('reporters');
-    reporters.output = function(messages) {
-      messages && messages.forEach(function(message) {
+    const reporters = require('reporters');
+    reporters.output = (messages) => {
+      messages && messages.forEach((message) => {
         console.log(message.description);
       })
     };
@@ -139,14 +139,14 @@ You can use one of the built-in output handlers with `reporters.getOutput('name'
     ];
 
 ### report(messages)
-This method will the handle the messages.
+This method will handle the messages.
 `report()` will first use `filterOrUpdate` and then check if sourcemaps are available to update error locations.
 It will then send the results to the `output` handlers.
 
 You can log messages in this way:
 
-    var reporters = require('reporters');
-    var message = {
+    const reporters = require('reporters');
+    const message = {
       filePath: 'index.html',
       type: 'warning',
       description: 'HTML should be minified.'
@@ -155,13 +155,13 @@ You can log messages in this way:
 
 If you write your own reporter you can manually call this method to handle messages in the same way:
 
-    var unsupportedModule = required('unsupportedModule');
-    var reporters = require('reporters');
+    const unsupportedModule = required('unsupportedModule');
+    const reporters = require('reporters');
     
     gulp.src('scripts/**/*.js')
       .pipe(unsupportedModule({
-        reporter: function (errors) {
-          var messages = errors.map(function (error) {
+        reporter: (errors) => {
+          const messages = errors.map((error) => {
             return {
               description: error.reason,
               sourceName: 'unsupportedModule'
